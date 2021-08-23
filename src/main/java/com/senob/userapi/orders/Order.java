@@ -1,4 +1,4 @@
-package com.senob.userapi.accounts;
+package com.senob.userapi.orders;
 
 import lombok.AccessLevel;
 import lombok.Getter;
