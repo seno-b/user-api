@@ -1,10 +1,12 @@
 package com.senob.userapi.accounts;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -12,6 +14,7 @@ import javax.persistence.*;
 public class Account {
 
     @Id @GeneratedValue
+    @Column(name = "account_id")
     private Long id;
 
     @Column(length = 20)
@@ -31,4 +34,15 @@ public class Account {
 
     @Enumerated(EnumType.STRING)
     private GenderType gender;
+
+    @JsonIgnore
+    @Column(name = "activated")
+    private boolean activated;
+
+    @ManyToMany
+    @JoinTable(
+            name = "account_authority"
+            , joinColumns = {@JoinColumn(name = "account_id", referencedColumnName = "account_id")}
+            , inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
+    private Set<Authority> authorities;
 }

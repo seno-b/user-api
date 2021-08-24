@@ -1,4 +1,7 @@
 spring:
+  h2:
+    console:
+      enabled: true
   datasource:
     url: jdbc:h2:tcp://localhost/~/user-api
     username: sa
@@ -14,6 +17,7 @@ spring:
         format_sql: true
         default_batch_fetch_size: 100
     open-in-view: false
+    database-platform: org.hibernate.dialect.H2Dialect
 logging:
   level: debug
 
