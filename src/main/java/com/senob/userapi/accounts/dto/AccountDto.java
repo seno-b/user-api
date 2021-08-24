@@ -2,10 +2,8 @@ package com.senob.userapi.accounts.dto;
 
 import com.senob.userapi.accounts.GenderType;
 import com.sun.istack.NotNull;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
@@ -28,7 +26,6 @@ public class AccountDto {
     private String nickname;
 
     @NotNull
-    @Size(max = 20)
     private int tel;
 
     @NotNull
@@ -37,4 +34,13 @@ public class AccountDto {
     private String email;
 
     private GenderType gender;
+
+    public AccountDto(String username, String password, String nickname, int tel, String email, GenderType gender) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.tel = tel;
+        this.email = email;
+        this.gender = gender;
+    }
 }

@@ -1,18 +1,17 @@
 package com.senob.userapi.accounts;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.senob.userapi.accounts.dto.AccountDto;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
 @Builder
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Account {
 
     @Id @GeneratedValue
@@ -47,4 +46,8 @@ public class Account {
             , joinColumns = {@JoinColumn(name = "account_id", referencedColumnName = "account_id")}
             , inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
     private Set<Authority> authorities;
+
+    public AccountDto convertToAccountDto() {
+        return new AccountDto(this.username, this.password, this.nickname, this.tel, this.email, this.gender);
+    }
 }

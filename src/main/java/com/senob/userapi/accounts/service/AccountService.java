@@ -21,7 +21,7 @@ public class AccountService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Account signup(AccountDto accountDto) throws DuplicateMemberException {
+    public AccountDto signup(AccountDto accountDto) throws DuplicateMemberException {
         if (accountRepository.findOneWithAuthoritiesByUsername(accountDto.getUsername()).orElse(null) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
@@ -35,11 +35,16 @@ public class AccountService {
                 .username(accountDto.getUsername())
                 .password(passwordEncoder.encode(accountDto.getPassword()))
                 .nickname(accountDto.getNickname())
+                .tel(accountDto.getTel())
+                .email(accountDto.getEmail())
+                .gender(accountDto.getGender())
                 .authorities(Collections.singleton(authority))
                 .activated(true)
                 .build();
 
-        return accountRepository.save(account);
+        accountRepository.save(account);
+
+        return accountDto;
     }
 
     @Transactional(readOnly = true)
