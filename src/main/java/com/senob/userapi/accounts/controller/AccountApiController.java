@@ -5,12 +5,10 @@ import com.senob.userapi.accounts.service.AccountService;
 import javassist.bytecode.DuplicateMemberException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 
 @RestController
 @RequestMapping("/api")
@@ -22,4 +20,10 @@ public class AccountApiController {
     public ResponseEntity<AccountDto> signup(@Valid @RequestBody AccountDto accountDto) throws DuplicateMemberException {
         return ResponseEntity.ok(accountService.signup(accountDto));
     }
+
+    @GetMapping("/{email:.+}")
+    public ResponseEntity<AccountDto> getAccount(@NotEmpty(message = "이메일을 입력해주세요.") @PathVariable(value = "email") String email) throws DuplicateMemberException {
+        return ResponseEntity.ok(accountService.getAccount(email));
+    }
+
 }

@@ -46,4 +46,15 @@ public class AccountService {
 
         return accountDto;
     }
+
+    @Transactional(readOnly = true)
+    public AccountDto getAccount(String email) {
+        Optional<Account> oneByEmail = accountRepository.findOneByEmail(email);
+        if( oneByEmail.isPresent() ){
+            Account account = oneByEmail.get();
+            return account.convertToAccountDto();
+        }
+
+        return null;
+    }
 }
