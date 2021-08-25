@@ -1,4 +1,4 @@
-package com.senob.userapi.login;
+package com.senob.userapi.login.controller;
 
 import com.senob.userapi.jwt.JwtFilter;
 import com.senob.userapi.jwt.TokenProvider;
