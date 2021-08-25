@@ -1,9 +1,9 @@
 package com.senob.userapi.login.dto;
 
-import com.sun.istack.NotNull;
 import lombok.*;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Builder
@@ -11,11 +11,10 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LoginDto {
 
-    @NotNull
-    @Size(min = 3, max = 20)
+    @NotEmpty(message = "이메일을 입력해주세요.")
+    @Email(regexp = "^\\w+@\\w+\\.\\w+(\\.\\w+$)?", message = "이메일 형식이 올바르지 않습니다.")
     private String email;
 
-    @NotNull
-    @Size(min = 10, max = 100)
+    @NotEmpty(message = "패스워드를 입력해주세요.")
     private String password;
 }

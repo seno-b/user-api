@@ -2,7 +2,6 @@ package com.senob.userapi.accounts.dto;
 
 import com.senob.userapi.accounts.GenderType;
 import lombok.*;
-import org.springframework.data.repository.query.Param;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
