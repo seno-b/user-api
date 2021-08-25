@@ -24,7 +24,7 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return accountRepository.findOneWithAuthoritiesByUsername(username)
+        return accountRepository.findOneWithAuthoritiesByEmail(username)
                 .map(account -> createUser(username, account))
                 .orElseThrow(() -> new UsernameNotFoundException(username + " -> 등록되지 않은 회원입니다."));
     }
@@ -37,7 +37,7 @@ public class CustomUserDetailService implements UserDetailsService {
                 .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
                 .collect(Collectors.toList());
 
-        return new User(account.getUsername()
+        return new User(account.getEmail()
                         , account.getPassword()
                         , grantedAuthorities);
     }

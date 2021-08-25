@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
     @EntityGraph(attributePaths = "authorities")
-    Optional<Account> findOneWithAuthoritiesByUsername(String username);
+    Optional<Account> findOneWithAuthoritiesByEmail(String email);
 }

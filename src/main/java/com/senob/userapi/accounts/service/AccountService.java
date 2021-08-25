@@ -22,7 +22,7 @@ public class AccountService {
 
     @Transactional
     public AccountDto signup(AccountDto accountDto) throws DuplicateMemberException {
-        if (accountRepository.findOneWithAuthoritiesByUsername(accountDto.getUsername()).orElse(null) != null) {
+        if (accountRepository.findOneWithAuthoritiesByEmail(accountDto.getEmail()).orElse(null) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
 
@@ -46,15 +46,4 @@ public class AccountService {
 
         return accountDto;
     }
-
-    @Transactional(readOnly = true)
-    public Optional<Account> getUserWithAuthorities(String username) {
-        return accountRepository.findOneWithAuthoritiesByUsername(username);
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<Account> getMyUserWithAuthorities() {
-        return SecurityUtil.getCurrentUsername().flatMap(accountRepository::findOneWithAuthoritiesByUsername);
-    }
-
 }
