@@ -5,6 +5,7 @@ import com.senob.userapi.accounts.dto.AccountDto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
@@ -27,8 +28,8 @@ public class Account {
     @Column(length = 100)
     private String password;
 
-    @Column(length = 20)
-    private int tel;
+    @Column(precision = 20, scale = 0)
+    private BigDecimal tel;
 
     @Column(length = 100)
     private String email;
