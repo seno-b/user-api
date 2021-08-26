@@ -31,3 +31,14 @@
 - Spring-boot 2.5.3
 - gradle
 - jdk 11
+
+### lombok settings (Intellij)
+1. Preferences plugin lombok 검색 실행 (재시작)
+2. Preferences Annotation Processors 검색 Enable annotation processing 체크 (재시작)
+### gradle build
+- ```./gradle clean```
+- ```./gradle build```
+### swagger url
+- ```http://localhost:8080/swagger-ui.html```
+### queryDsl Create QType
+- ```./gradlew clean compileQuerydsl```
