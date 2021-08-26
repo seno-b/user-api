@@ -3,10 +3,13 @@ package com.senob.userapi.accounts.service;
 import com.senob.userapi.accounts.Account;
 import com.senob.userapi.accounts.Authority;
 import com.senob.userapi.accounts.dto.AccountDto;
+import com.senob.userapi.accounts.dto.AccountOrderDto;
+import com.senob.userapi.accounts.dto.AccountSearch;
 import com.senob.userapi.accounts.repository.AccountRepository;
-import com.senob.userapi.util.SecurityUtil;
 import javassist.bytecode.DuplicateMemberException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +29,6 @@ public class AccountService {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
 
-        //빌더 패턴의 장점
         Authority authority = Authority.builder()
                 .authorityName("ROLE_USER")
                 .build();
@@ -56,5 +58,15 @@ public class AccountService {
         }
 
         return null;
+    }
+
+    public Page<AccountOrderDto> getPagableAccounts(AccountSearch accountSearch, Pageable pageable) {
+
+        Page<AccountOrderDto> accountOrderDtos = accountRepository.searchAll(accountSearch, pageable);
+
+        System.out.println("accountOrderDtos = " + accountOrderDtos);
+
+        return accountOrderDtos;
+
     }
 }
