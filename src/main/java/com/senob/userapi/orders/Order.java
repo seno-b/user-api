@@ -1,5 +1,6 @@
 package com.senob.userapi.orders;
 
+import com.senob.userapi.accounts.Account;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 public class Order {
 
     @Id @GeneratedValue
-    @Column(length = 12)
+    @Column(name = "order_id", length = 12)
     private Long id;
 
     @Column(length = 100)
@@ -23,6 +24,10 @@ public class Order {
 
     @CreatedDate
     private LocalDateTime paymentDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
+    private Account account;
 
 }
 
