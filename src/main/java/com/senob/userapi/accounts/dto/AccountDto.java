@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Getter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class AccountDto {
 
     @NotEmpty(message = "이름은 필수 입력 값입니다.")

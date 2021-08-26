@@ -48,8 +48,8 @@ public class AccountService {
     }
 
     @Transactional(readOnly = true)
-    public AccountDto getAccount(String email) {
-        Optional<Account> oneByEmail = accountRepository.findOneByEmail(email);
+    public AccountDto getAccount(Long account_id) {
+        Optional<Account> oneByEmail = accountRepository.findById(account_id);
         if( oneByEmail.isPresent() ){
             Account account = oneByEmail.get();
             return account.convertToAccountDto();
